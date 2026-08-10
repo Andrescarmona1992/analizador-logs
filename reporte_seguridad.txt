@@ -1,0 +1,3 @@
+=== REPORTE DE CIBERSEGURIDAD ===
+Ataques detectados: 2
+Errores del sistema: 2
