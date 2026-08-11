@@ -1,8 +1,6 @@
 name: Tuberia de Integracion Continua (CI)
 
-on:
-  push:
-    branches: [ "principal" ]
+on: [push]
 
 jobs:
   compilar-contenedor:
