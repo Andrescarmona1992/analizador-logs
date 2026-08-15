@@ -1,15 +1,17 @@
-
-# 1. Usamos una imagen oficial de Python ligera como base
+# 1. Imagen oficial de Python ligera como base
 FROM python:3.10-slim
 
-# 2. Creamos y nos movemos a la carpeta de trabajo dentro del contenedor
+# 2. Carpeta de trabajo dentro del contenedor
 WORKDIR /app
 
-# 3. Instalamos las librerías necesarias incluyendo pymongo para la base de datos
-RUN pip install --no-cache-dir fastapi uvicorn requests cryptography pymongo[srv]
+# 3. Copiar el archivo de dependencias primero (Optimiza la caché de Docker)
+COPY requirements.txt ./
 
-# 4. Copiamos todos tus scripts de ciberseguridad dentro del contenedor
-COPY automatizacion.py mi_api.py alertas_telegram.py ./
+# 4. Instalar todas las librerías necesarias de forma automática
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Comando por defecto para arrancar tu API de seguridad con Uvicorn
+# 5. Copiar el resto de los scripts del proyecto al contenedor
+COPY . .
+
+# 6. Comando por defecto para arrancar tu API con Uvicorn de forma profesional
 CMD ["uvicorn", "mi_api:app", "--host", "0.0.0.0", "--port", "8000"]
