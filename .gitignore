@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+reporte_seguridad.txt
+servidor.log
+*.log
+.env
